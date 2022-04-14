@@ -3,7 +3,7 @@ import base64
 from sendgrid import SendGridAPIClient
 from sendgrid.helpers.mail import (Mail, Attachment, FileContent, FileName, FileType, Disposition)
 
-file_path = '' #insert file path (include filetype in name)
+file_path = '' #insert image file path (include filetype in name)
 
 message = Mail(
     from_email='groomj@cardiff.ac.uk',
