@@ -26,6 +26,8 @@ print(local_list)
 new_addition = list(set(dropbox_dict.keys()) - set(local_list))
 print(new_addition)
 
+#Below function needs help with
+
 if not new_addition:
     print("known_people is upto date")
 
