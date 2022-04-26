@@ -27,9 +27,15 @@ print(new_addition)
 
 #Below function needs help with
 
-'''if not new_addition:
+if not new_addition:
     print("known_people is upto date")
 
 else:
-    for newfile in new_addition:
-        dbx.files_download_to_file('Download Path',dropbox_dict[newfile])'''
+    for i in new_addition:
+        print("Downloading " + i)
+        dbx.files_download_to_file(i, i)
+        print("Downloaded " + i)
+        print("Adding " + i + " to known_people")
+        os.rename(i, "known_people/" + i)
+        print("Added " + i + " to known_people")
+        print("")
