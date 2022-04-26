@@ -17,6 +17,10 @@ with open(file_path, 'rb') as f:
     f.close()
 encoded_file = base64.b64encode(data).decode()
 
+#If file is a PNG then convert to JPG
+if file_path.endswith('.png'):
+    file_path = file_path.replace('.png', '.jpg')
+    
 attachedFile = Attachment(
     FileContent(encoded_file),
     FileName(file_path),
