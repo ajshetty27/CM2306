@@ -1,7 +1,9 @@
 import os
 import base64
+from dotenv import load_dotenv
 from sendgrid import SendGridAPIClient
 from sendgrid.helpers.mail import (Mail, Attachment, FileContent, FileName, FileType, Disposition)
+load_dotenv()
 
 file_path = '' #insert image file path (include filetype in name)
 
@@ -27,7 +29,7 @@ attachedFile = Attachment(
 message.attachment = attachedFile
         
 try:
-    sg = SendGridAPIClient('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')
+    sg = SendGridAPIClient(os.environ.get('SENDGRID_API_KEY'))
     response = sg.send(message)
     print(response.status_code)
     print(response.body)
