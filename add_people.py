@@ -1,7 +1,8 @@
 import dropbox
 import os
-
-dbx = dropbox.Dropbox('ACCESS TOKEN (will add when downloaded to raspberry pi)')
+from dotenv import load_dotenv
+load_dotenv()
+dbx = dropbox.Dropbox(os.environ.get('DROPBOX_API_KEY'))
 
 dropbox_dict = {}
 local_list = []
