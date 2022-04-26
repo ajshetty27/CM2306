@@ -21,9 +21,12 @@ number_files = len(list_of_files)
 names = list_of_files.copy()
 
 for i in range(number_files):
-    globals()['image_{}'.format(i)] = face_recognition.load_image_file(list_of_files[i])
-    globals()['image_encoding_{}'.format(i)] = face_recognition.face_encodings(globals()['image_{}'.format(i)])[0]
-    known_face_encodings.append(globals()['image_encoding_{}'.format(i)])
+    #load image
+    image = face_recognition.load_image_file(list_of_files[i])
+    #find face encodings
+    face_encoding = face_recognition.face_encodings(image)[0]
+    #add face encoding to array
+    known_face_encodings.append(face_encoding)
 
     # Create array of known names
     names[i] = names[i].replace("known_people/", "")  
