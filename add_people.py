@@ -31,7 +31,7 @@ if not new_addition:
 else:
     for i in new_addition:
         print("Downloading " + i)
-        dbx.files_download_to_file(i, i)
+        dbx.files_download_to_file(i, dropbox_dict[i])
         print("Downloaded " + i)
         print("Adding " + i + " to known_people")
         os.rename(i, "known_people/" + i)
