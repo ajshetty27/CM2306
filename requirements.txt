@@ -3,3 +3,5 @@ numpy
 face_recognition
 grovepi
 dropbox
+cmake
+dlib
