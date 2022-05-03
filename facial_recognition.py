@@ -1,3 +1,4 @@
+import datetime
 import face_recognition
 import cv2
 import numpy as np
@@ -93,9 +94,10 @@ while True:
         if name != "Unknown.jpg":
             cv2.putText(frame, name[:-4], (left + 6, bottom - 6), font, 1.0, (255, 255, 255), 1)
         else:
-            cv2.putText(frame, name, (left + 6, bottom - 6), font, 1.0, (255, 255, 255), 1
+            cv2.putText(frame, name, (left + 6, bottom - 6), font, 1.0, (255, 255, 255), 1)
         if name == "Unknown":
-            cv2.imwrite("Intruder_pic.jpg", frame)
+            # Create a intruder image and attach current time to the filename
+            cv2.imwrite("intruder_images/" + str(datetime.datetime.now()) + ".jpg", frame)
             exec(open("send_email.py").read())
 
     # Display the resulting image

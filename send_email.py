@@ -5,7 +5,8 @@ from sendgrid import SendGridAPIClient
 from sendgrid.helpers.mail import (Mail, Attachment, FileContent, FileName, FileType, Disposition)
 load_dotenv()
 
-file_path = '' #insert image file path (include filetype in name)
+# Any image in intruder_images folder 
+file_path = os.path.join(os.path.dirname(__file__), 'intruder_images/')
 
 message = Mail(
     from_email='groomj@cardiff.ac.uk',

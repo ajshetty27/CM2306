@@ -1,6 +1,9 @@
 face_recognition
-opencv-python
-numpy
+opencv-python~=4.5.5.64
+numpy~=1.22.3
 cmake
 dlib
-dropbox
+dropbox~=11.30.0
+dotenv
+sendgrid
+Pillow~=9.1.0
