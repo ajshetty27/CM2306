@@ -1,12 +1,13 @@
 from tkinter import *
-from tkinter import ttk
+from tkinter import ttk, messagebox
 from PIL import ImageTk, Image
 import os
-import cv2
 
-
-def add_person():
-    os.system('add_person.py')
+def sync_people():
+    # Execute the add_people.py script
+    os.system('python add_people.py')
+    # Provide a message box to confirm that the person has been added
+    messagebox.showinfo("Sync complete", "Latest known people have been added to the local known_people folder")
 
 
 def intruder_images():
@@ -73,7 +74,7 @@ separator = ttk.Separator(root, orient='horizontal')
 separator.pack(fill='x')
 
 # Create buttons with commands
-btn = Button(root, text='Add Person', bd='4', command=add_person)
+btn = Button(root, text='Add Person', bd='4', command=sync_people)
 btn2 = Button(root, text='Display Intruder Images', bd='4', command=intruder_images)
 btn3 = Button(root, text='Display Known People', bd='4', command=display_known_people)
 
