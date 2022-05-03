@@ -5,7 +5,7 @@ from sendgrid import SendGridAPIClient
 from sendgrid.helpers.mail import (Mail, Attachment, FileContent, FileName, FileType, Disposition)
 load_dotenv()
 
-# Any image in intruder_images folder 
+# Get latest image from intruder folder
 file_path = os.path.join(os.path.dirname(__file__), 'intruder_images/')
 
 message = Mail(
