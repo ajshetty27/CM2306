@@ -30,6 +30,27 @@ def intruder_images():
         label = Label(window, text=filename)
         label.pack()
 
+def display_known_people():
+    # Open a new window
+    window = Toplevel()
+    window.title("Known People")
+    window.geometry('500x500')
+    # Show the images in known_people folder
+    for i in os.listdir('known_people'):
+        # Open the image and resize it
+        img = Image.open('known_people/' + i)
+        img = img.resize((150, 150), Image.ANTIALIAS)
+        # Get the filename of the image
+        filename = os.path.splitext(i)[0]
+        # Convert the image to Tkinter format
+        img = ImageTk.PhotoImage(img)
+        # Create a label for the image and add it to the window, also add the filename
+        label = Label(window, image=img)
+        label.image = img
+        label.pack()
+        label = Label(window, text=filename)
+        label.pack()
+
 
 root = Tk()
 root.resizable(width=False, height=False)
@@ -54,9 +75,11 @@ separator.pack(fill='x')
 # Create buttons with commands
 btn = Button(root, text='Add Person', bd='4', command=add_person)
 btn2 = Button(root, text='Display Intruder Images', bd='4', command=intruder_images)
+btn3 = Button(root, text='Display Known People', bd='4', command=display_known_people)
 
 # Set the position of buttons
 btn.place(relx=0.1, rely=0.80, relheight=0.1, relwidth=0.2)
 btn2.place(relx=0.4, rely=0.80, relheight=0.1, relwidth=0.2)
+btn3.place(relx=0.7, rely=0.80, relheight=0.1, relwidth=0.2)
 
 root.mainloop()
