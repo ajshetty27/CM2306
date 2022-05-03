@@ -2,6 +2,7 @@ from tkinter import *
 from tkinter import ttk
 from PIL import ImageTk, Image
 import os
+import webview
 
 
 def add_person():
@@ -10,6 +11,11 @@ def add_person():
 
 def intruder_images():
     os.system('')
+
+def view_camera():
+    os.system('rpi_surveillance_camera.py')
+    webview.create_window('Camera View', 'https://www.google.com') #insert website here
+    webview.start()
 
 
 root = Tk()
