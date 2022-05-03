@@ -4,6 +4,6 @@ numpy~=1.22.3
 cmake
 dlib
 dropbox~=11.30.0
-dotenv
+python-dotenv
 sendgrid
 Pillow~=9.1.0
