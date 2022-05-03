@@ -76,7 +76,7 @@ while True:
 
     process_this_frame = not process_this_frame
 
-
+    intruder_path = os.path.join(dirname, 'intruder_images/')
     # Display the results
     for (top, right, bottom, left), name in zip(face_locations, face_names):
         # Scale back up face locations since the frame we detected in was scaled to 1/4 size
@@ -96,8 +96,8 @@ while True:
         else:
             cv2.putText(frame, name, (left + 6, bottom - 6), font, 1.0, (255, 255, 255), 1)
         if name == "Unknown":
-            # Create a intruder image and attach current time to the filename
-            cv2.imwrite("intruder_images/" + str(datetime.datetime.now()) + ".jpg", frame)
+            # Add the new intruder to the intruder_folder with the current date and time
+            cv2.imwrite(intruder_path + str(datetime.datetime.now()) + ".jpg", frame)
             exec(open("send_email.py").read())
 
     # Display the resulting image
