@@ -5,7 +5,7 @@ import os
 
 def sync_people():
     # Execute the add_people.py script
-    os.system('python add_people.py')
+    exec(open("add_people.py").read())
     # Provide a message box to confirm that the person has been added
     messagebox.showinfo("Sync complete", "Latest known people have been added to the local known_people folder")
 
