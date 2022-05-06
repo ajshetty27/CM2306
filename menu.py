@@ -2,6 +2,7 @@ from tkinter import *
 from tkinter import ttk, messagebox
 from PIL import ImageTk, Image
 import os
+import webbrowser
 
 def sync_people():
     # Execute the add_people.py script
@@ -52,7 +53,10 @@ def display_known_people():
         label = Label(window, text=filename)
         label.pack()
 
-
+def view_camera():
+    os.system('python3 rpi_camera_surveillance_system.py')
+    webbrowser.open('10.3.64.247:8000', new=0, autoraise=True)
+    
 root = Tk()
 root.resizable(width=False, height=False)
 # root.resizable(width=True, height=True)
@@ -78,9 +82,11 @@ btn = Button(root, text='Add Person', bd='4', command=sync_people)
 btn2 = Button(root, text='Display Intruder Images', bd='4', command=intruder_images)
 btn3 = Button(root, text='Display Known People', bd='4', command=display_known_people)
 
+
 # Set the position of buttons
 btn.place(relx=0.1, rely=0.80, relheight=0.1, relwidth=0.2)
 btn2.place(relx=0.4, rely=0.80, relheight=0.1, relwidth=0.2)
 btn3.place(relx=0.7, rely=0.80, relheight=0.1, relwidth=0.2)
+
 
 root.mainloop()

@@ -5,14 +5,15 @@ from sendgrid import SendGridAPIClient
 from sendgrid.helpers.mail import (Mail, Attachment, FileContent, FileName, FileType, Disposition)
 load_dotenv()
 
-# Get latest image from intruder folder
-file_path = os.path.join(os.path.dirname(__file__), 'intruder_images/')
+# Any image in intruder_images folder
+file_path = 'Intruder_pic.jpg'
+#file_path = os.path.join(os.path.dirname(__file__), 'intruder_images/')
 
 message = Mail(
     from_email='groomj@cardiff.ac.uk',
-    to_emails='ShettyA6@cardiff.ac.uk',
-    subject='Unknown Person at your Camera',
-    html_content='<h1> Person Detected </h1><p>An unknown person has been detected at your security camera. Please find attached the following image captured. </p>'
+    to_emails='votton.hooper@gmail.com',
+    subject='INTRUDER detected',
+    html_content='<h1> Intruder Detected </h1><p>An intruder has been detected at your security camera. Please find attached the following image captured. </p>'
 )
 
 with open(file_path, 'rb') as f:

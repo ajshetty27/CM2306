@@ -1,9 +1,62 @@
-import datetime
 import face_recognition
 import cv2
 import numpy as np
 import os
 import glob
+import grovepi
+import sys
+import time 
+
+if sys.platform == 'uwp':
+    import winrt_smbus as smbus
+    bus = smbus.SMBus(1)
+else:
+    import smbus
+    import RPi.GPIO as GPIO
+    rev = GPIO.RPI_REVISION
+    if rev == 2 or rev == 3:
+        bus = smbus.SMBus(1)
+    else:
+        bus = smbus.SMBus(0)
+ 
+# this device has two I2C addresses
+DISPLAY_RGB_ADDR = 0x62
+DISPLAY_TEXT_ADDR = 0x3e
+ 
+# set backlight to (R,G,B) (values from 0..255 for each)
+def setRGB(r,g,b):
+    bus.write_byte_data(DISPLAY_RGB_ADDR,0,0)
+    bus.write_byte_data(DISPLAY_RGB_ADDR,1,0)
+    bus.write_byte_data(DISPLAY_RGB_ADDR,0x08,0xaa)
+    bus.write_byte_data(DISPLAY_RGB_ADDR,4,r)
+    bus.write_byte_data(DISPLAY_RGB_ADDR,3,g)
+    bus.write_byte_data(DISPLAY_RGB_ADDR,2,b)
+ 
+# send command to display (no need for external use)    
+def textCommand(cmd):
+    bus.write_byte_data(DISPLAY_TEXT_ADDR,0x80,cmd)
+ 
+# set display text \n for second line(or auto wrap)     
+def setText(text):
+    textCommand(0x01) # clear display
+    time.sleep(.05)
+    textCommand(0x08 | 0x04) # display on, no cursor
+    textCommand(0x28) # 2 lines
+    time.sleep(.05)
+    count = 0
+    row = 0
+    for c in text:
+        if c == '\n' or count == 16:
+            count = 0
+            row += 1
+            if row == 2:
+                break
+            textCommand(0xc0)
+            if c == '\n':
+                continue
+        count += 1
+        bus.write_byte_data(DISPLAY_TEXT_ADDR,0x40,ord(c))
+
 
 # Get a reference to webcam #0 (the default one)
 video_capture = cv2.VideoCapture(0)
@@ -38,6 +91,7 @@ face_locations = []
 face_encodings = []
 face_names = []
 process_this_frame = True
+spammer = 0
 
 while True:
     # Grab a single frame of video
@@ -76,7 +130,7 @@ while True:
 
     process_this_frame = not process_this_frame
 
-    intruder_path = os.path.join(dirname, 'intruder_images/')
+
     # Display the results
     for (top, right, bottom, left), name in zip(face_locations, face_names):
         # Scale back up face locations since the frame we detected in was scaled to 1/4 size
@@ -91,15 +145,20 @@ while True:
         # Draw a label with a name below the face
         cv2.rectangle(frame, (left, bottom - 35), (right, bottom), (0, 0, 255), cv2.FILLED)
         font = cv2.FONT_HERSHEY_DUPLEX
-        if name != "Unknown.jpg":
+        if name != "Unknown":
             cv2.putText(frame, name[:-4], (left + 6, bottom - 6), font, 1.0, (255, 255, 255), 1)
+            setText("Welcome "+name[:-4])
+            setRGB(0,128,64)       
         else:
-            cv2.putText(frame, name, (left + 6, bottom - 6), font, 1.0, (255, 255, 255), 1)
-        if name == "Unknown":
-            # Add the new intruder to the intruder_folder with the current date and time
-            cv2.imwrite(intruder_path + str(datetime.datetime.now()) + ".jpg", frame)
-            exec(open("send_email.py").read())
-            exec(open("send_sms.py").read())
+            cv2.putText(frame, name, (left + 6, bottom - 6), font, 1.0, (255, 255, 255), 1)  
+            setText("Intruder Alert")
+            setRGB(0,128,64)
+            cv2.imwrite("Intruder_pic.jpg",frame)
+            if spammer < 1:
+                exec(open("send_email.py").read())
+                exec(open("send_sms.py").read())
+                spammer += 1
+            
 
     # Display the resulting image
     cv2.imshow('Video', frame)
