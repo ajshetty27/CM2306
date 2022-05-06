@@ -13,7 +13,7 @@ API_KEY = os.environ.get('INFOBIP_API_KEY')
 print('THE API KEY: ',API_KEY)
 
 SENDER = "InfoSMS"
-RECIPIENT = "447445086170"
+RECIPIENT = "447341033081"
 MESSAGE_TEXT = "ALERT - Intruder detected at your security camera. Check your email for more details."
 
 conn = http.client.HTTPSConnection(BASE_URL)
