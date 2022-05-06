@@ -11,6 +11,7 @@ for filename in os.listdir("known_people/"):
             try:
                 dbx.files_upload(f.read(), "/known_people/" + filename)
             except dropbox.exceptions.AccessError:
-                print("File already exists in Dropbox")
+                # Display which filename already exists
+                print(filename + " already exists in Dropbox")
                 continue
             print("Uploaded " + filename)
