@@ -6,8 +6,7 @@ from sendgrid.helpers.mail import (Mail, Attachment, FileContent, FileName, File
 load_dotenv()
 
 # Any image in intruder_images folder
-file_path = 'Intruder_pic.jpg'
-#file_path = os.path.join(os.path.dirname(__file__), 'intruder_images/')
+file_path = os.path.join(os.path.dirname(__file__), 'intruder_images/')
 
 message = Mail(
     from_email='groomj@cardiff.ac.uk',
