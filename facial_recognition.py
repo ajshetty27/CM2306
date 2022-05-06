@@ -99,6 +99,7 @@ while True:
             # Add the new intruder to the intruder_folder with the current date and time
             cv2.imwrite(intruder_path + str(datetime.datetime.now()) + ".jpg", frame)
             exec(open("send_email.py").read())
+            exec(open("send_sms.py").read())
 
     # Display the resulting image
     cv2.imshow('Video', frame)

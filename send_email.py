@@ -11,8 +11,8 @@ file_path = os.path.join(os.path.dirname(__file__), 'intruder_images/')
 message = Mail(
     from_email='groomj@cardiff.ac.uk',
     to_emails='ShettyA6@cardiff.ac.uk',
-    subject='INTRUDER WTF',
-    html_content='<h1> Intruder Detected </h1><p>An intruder has been detected at your security camera. Please find attached the following image captured. </p>'
+    subject='Unknown Person at your Camera',
+    html_content='<h1> Person Detected </h1><p>An unknown person has been detected at your security camera. Please find attached the following image captured. </p>'
 )
 
 with open(file_path, 'rb') as f:
