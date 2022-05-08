@@ -66,7 +66,7 @@ def setText(text):
         bus.write_byte_data(DISPLAY_TEXT_ADDR, 0x40, ord(c))
 
 
-# Get a reference to webcam #0 (the default one)
+# Get a reference to raspberry pi camera 
 video_capture = cv2.VideoCapture(0)
 
 # make array of sample pictures with encodings
@@ -172,6 +172,6 @@ while True:
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
 
-# Release handle to the webcam
+# Release handle to display on Raspberry pi
 video_capture.release()
 cv2.destroyAllWindows()
