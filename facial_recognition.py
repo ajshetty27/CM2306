@@ -8,6 +8,8 @@ import sys
 import time
 import datetime
 
+#Implement code required for LCD BackLight 
+
 if sys.platform == 'uwp':
     import winrt_smbus as smbus
 
@@ -92,7 +94,7 @@ for i in range(number_files):
     names[i] = names[i].replace("known_people/", "")
     known_face_names.append(names[i])
 
-# Initialize some variables
+# Initialize variables hold values 
 face_locations = []
 face_encodings = []
 face_names = []
@@ -121,11 +123,6 @@ while True:
             matches = face_recognition.compare_faces(known_face_encodings, face_encoding)
             name = "Unknown"
 
-            # # If a match was found in known_face_encodings, just use the first one.
-            # if True in matches:
-            #     first_match_index = matches.index(True)
-            #     name = known_face_names[first_match_index]
-
             # Or instead, use the known face with the smallest distance to the new face
             face_distances = face_recognition.face_distance(known_face_encodings, face_encoding)
             best_match_index = np.argmin(face_distances)
@@ -153,12 +150,15 @@ while True:
         font = cv2.FONT_HERSHEY_DUPLEX
         if name != "Unknown":
             cv2.putText(frame, name[:-4], (left + 6, bottom - 6), font, 1.0, (255, 255, 255), 1)
+            #Display name on LCD 
             setText("Welcome " + name[:-4])
             setRGB(0, 128, 64)
         else:
             cv2.putText(frame, name, (left + 6, bottom - 6), font, 1.0, (255, 255, 255), 1)
+            #Display Inrtuder message on LCD
             setText("Intruder Alert")
             setRGB(0, 128, 64)
+            #Create image of intruder and save to intruder folder 
             cv2.imwrite(intruder_path + str(datetime.datetime.now()) + ".jpg", frame)
             if spammer < 1:
                 exec(open("send_email.py").read())
