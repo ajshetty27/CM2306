@@ -13,11 +13,8 @@ for entry in dbx.files_list_folder('').entries:
     path = entry.name
     path_check = entry.id
     dropbox_dict[path] = path_check
-    # print(path)
-    # print(path_check)
 
 for filename in os.listdir("known_people/"):
-    # print(filename)
     local_list.append(filename)
 
 print(dropbox_dict)
