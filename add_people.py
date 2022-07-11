@@ -13,11 +13,8 @@ for entry in dbx.files_list_folder('').entries:
     path = entry.name
     path_check = entry.id
     dropbox_dict[path] = path_check
-    # print(path)
-    # print(path_check)
 
 for filename in os.listdir("known_people/"):
-    # print(filename)
     local_list.append(filename)
 
 print(dropbox_dict)
@@ -28,7 +25,7 @@ new_addition = list(set(dropbox_dict.keys()) - set(local_list))
 print(new_addition)
 
 if not new_addition:
-    print("known_people is upto date")
+    print("known_people is up to date")
 
 else:
     for i in new_addition:

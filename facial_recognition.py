@@ -30,7 +30,7 @@ DISPLAY_TEXT_ADDR = 0x3e
 
 
 # set backlight to (R,G,B) (values from 0..255 for each)
-def setRGB(r, g, b):
+def set_rgb(r, g, b):
     bus.write_byte_data(DISPLAY_RGB_ADDR, 0, 0)
     bus.write_byte_data(DISPLAY_RGB_ADDR, 1, 0)
     bus.write_byte_data(DISPLAY_RGB_ADDR, 0x08, 0xaa)
@@ -40,16 +40,16 @@ def setRGB(r, g, b):
 
 
 # send command to display (no need for external use)    
-def textCommand(cmd):
+def text_command(cmd):
     bus.write_byte_data(DISPLAY_TEXT_ADDR, 0x80, cmd)
 
 
 # set display text \n for second line(or auto wrap)     
-def setText(text):
-    textCommand(0x01)  # clear display
+def set_text(text):
+    text_command(0x01)  # clear display
     time.sleep(.05)
-    textCommand(0x08 | 0x04)  # display on, no cursor
-    textCommand(0x28)  # 2 lines
+    text_command(0x08 | 0x04)  # display on, no cursor
+    text_command(0x28)  # 2 lines
     time.sleep(.05)
     count = 0
     row = 0
@@ -59,7 +59,7 @@ def setText(text):
             row += 1
             if row == 2:
                 break
-            textCommand(0xc0)
+            text_command(0xc0)
             if c == '\n':
                 continue
         count += 1
@@ -151,13 +151,13 @@ while True:
         if name != "Unknown":
             cv2.putText(frame, name[:-4], (left + 6, bottom - 6), font, 1.0, (255, 255, 255), 1)
             #Display name on LCD 
-            setText("Welcome " + name[:-4])
-            setRGB(0, 128, 64)
+            set_text("Welcome " + name[:-4])
+            set_rgb(0, 128, 64)
         else:
             cv2.putText(frame, name, (left + 6, bottom - 6), font, 1.0, (255, 255, 255), 1)
             #Display Inrtuder message on LCD
-            setText("Intruder Alert")
-            setRGB(0, 128, 64)
+            set_text("Intruder Alert")
+            set_rgb(0, 128, 64)
             #Create image of intruder and save to intruder folder 
             cv2.imwrite(intruder_path + str(datetime.datetime.now()) + ".jpg", frame)
             if spammer < 1:
