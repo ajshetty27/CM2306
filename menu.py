@@ -1,5 +1,4 @@
 import socket
-from tkinter import *
 from tkinter import ttk, messagebox
 from PIL import ImageTk, Image
 import os
