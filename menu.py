@@ -1,9 +1,15 @@
 import os
 import socket
 import webbrowser
-from tkinter import Button, Label, Tk, Toplevel, messagebox, ttk
+from tkinter import Button
+from tkinter import Label
+from tkinter import messagebox
+from tkinter import Tk
+from tkinter import Toplevel
+from tkinter import ttk
 
-from PIL import Image, ImageTk
+from PIL import Image
+from PIL import ImageTk
 
 
 def sync_people():
