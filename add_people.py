@@ -25,7 +25,7 @@ new_addition = list(set(dropbox_dict.keys()) - set(local_list))
 print(new_addition)
 
 if not new_addition:
-    print("known_people is upto date")
+    print("known_people is up to date")
 
 else:
     for i in new_addition:
