@@ -1,8 +1,9 @@
-import socket
-from tkinter import Button, Label, Tk, Toplevel, ttk, messagebox
-from PIL import ImageTk, Image
 import os
+import socket
 import webbrowser
+from tkinter import Button, Label, Tk, Toplevel, messagebox, ttk
+
+from PIL import Image, ImageTk
 
 
 def sync_people():
