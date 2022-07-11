@@ -90,7 +90,9 @@ root.geometry("800x650")
 root.title("Communication Networks")
 # root.configure(bg='white smoke')
 
-w = Label(root, text="Communication Networks", font=("Helvetica", "30", "bold"))
+w = Label(root,
+          text="Communication Networks",
+          font=("Helvetica", "30", "bold"))
 w.pack(pady=20)
 
 separator = ttk.Separator(root, orient="horizontal")
@@ -105,8 +107,14 @@ separator.pack(fill="x")
 
 # Create buttons with commands
 btn = Button(root, text="Add Person", bd="4", command=sync_people)
-btn2 = Button(root, text="Display Intruder Images", bd="4", command=intruder_images)
-btn3 = Button(root, text="Display Known People", bd="4", command=display_known_people)
+btn2 = Button(root,
+              text="Display Intruder Images",
+              bd="4",
+              command=intruder_images)
+btn3 = Button(root,
+              text="Display Known People",
+              bd="4",
+              command=display_known_people)
 
 # Set the position of buttons
 btn.place(relx=0.1, rely=0.80, relheight=0.1, relwidth=0.2)
