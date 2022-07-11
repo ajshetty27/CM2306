@@ -1,3 +1,4 @@
+import socket
 from tkinter import *
 from tkinter import ttk, messagebox
 from PIL import ImageTk, Image
@@ -55,10 +56,16 @@ def display_known_people():
         label = Label(window, text=filename)
         label.pack()
 
+# Get your own IP address
+def get_own_ip():
+    ip_address = socket.gethostbyname(socket.gethostname())
+    return ip_address
 
+# Open a new window and display the camera feed
 def view_camera():
     os.system('python3 rpi_camera_surveillance_system.py')
-    webbrowser.open('10.3.64.247:8000', new=0, autoraise=True)
+    # Open camera in your browser with your IP address
+    webbrowser.open(get_own_ip() + ':8080')
 
 
 root = Tk()
